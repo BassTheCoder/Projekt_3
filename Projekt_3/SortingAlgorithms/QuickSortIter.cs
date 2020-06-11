@@ -9,6 +9,9 @@ namespace Projekt_3
 
         public override void Sort(int[] t)
         {
+            stopwatch.Reset();
+            stopwatch.Start();
+
             int i, j, l, p, sp;
             int[] stos_l = new int [t.Length],
                 stos_p = new int [t.Length];
@@ -51,6 +54,9 @@ namespace Projekt_3
                     p = j;
                 } while (l < p);
             } while (sp >= 0);
+
+            stopwatch.Stop();
+            ElapsedTime = stopwatch.Elapsed;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Projekt_3
 
         public static void Run()
         {
-            string filePath = @"C:\Users\Patryk\Desktop\Projekt_3\wyniki.txt";
+            string filePath = @"C:\Users\Patryk\Desktop\Uczelnia\Projekt_3\wyniki.txt";
             FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate);
             using StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
 
@@ -26,6 +26,8 @@ namespace Projekt_3
             CocktailSort cocktailSort = new CocktailSort();
             SelectionSort selectionSort = new SelectionSort();
             HeapSort heapSort = new HeapSort();
+            QuickSortIter quickSortIter = new QuickSortIter();
+            QuickSortRecursive quickSortRecursive = new QuickSortRecursive();
 
             #region Ascending Array
             Log(writer, selectionSort.Type + " Sort - Ascending Array (length; elapsed time)");
@@ -158,6 +160,57 @@ namespace Projekt_3
             {
                 heapSort.Sort(item);
                 Log(writer, item.Length + ";" + heapSort.ElapsedTime);
+            }
+            #endregion
+
+            #region ConstantArray
+            Log(writer, "\n" + selectionSort.Type + " Sort - Constant Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.ConstantTabList)
+            {
+                selectionSort.Sort(item);
+                Log(writer, item.Length + ";" + selectionSort.ElapsedTime);
+            }
+
+            arrayGenerator.ConstantTabList = generatedArraysCopy.ConstantTabList;
+            Log(writer, "\n" + insertionSort.Type + " Sort - Constant Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.ConstantTabList)
+            {
+                insertionSort.Sort(item);
+                Log(writer, item.Length + ";" + insertionSort.ElapsedTime);
+            }
+
+            arrayGenerator.ConstantTabList = generatedArraysCopy.ConstantTabList;
+            Log(writer, "\n" + cocktailSort.Type + " Sort - Constant Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.ConstantTabList)
+            {
+                cocktailSort.Sort(item);
+                Log(writer, item.Length + ";" + cocktailSort.ElapsedTime);
+            }
+
+            arrayGenerator.ConstantTabList = generatedArraysCopy.ConstantTabList;
+            Log(writer, "\n" + heapSort.Type + " Sort - Constant Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.ConstantTabList)
+            {
+                heapSort.Sort(item);
+                Log(writer, item.Length + ";" + heapSort.ElapsedTime);
+            }
+            #endregion
+
+            #region Randomized - Quicksort
+            arrayGenerator.RandomizedTabList = generatedArraysCopy.RandomizedTabList;
+            Log(writer, "\n" + quickSortIter.Type + " Sort - Randomized Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.RandomizedTabList)
+            {
+                quickSortIter.Sort(item);
+                Log(writer, item.Length + ";" + quickSortIter.ElapsedTime);
+            }
+
+            arrayGenerator.RandomizedTabList = generatedArraysCopy.RandomizedTabList;
+            Log(writer, "\n" + quickSortRecursive.Type + " Sort - Randomized Array (length; elapsed time)");
+            foreach (int[] item in arrayGenerator.RandomizedTabList)
+            {
+                quickSortRecursive.Sort(item);
+                Log(writer, item.Length + ";" + quickSortRecursive.ElapsedTime);
             }
             #endregion
         }

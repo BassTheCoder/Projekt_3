@@ -34,7 +34,13 @@ namespace Projekt_3
 
         public override void Sort(int[] tab)
         {
+            stopwatch.Reset();
+            stopwatch.Start();
+
             sort(tab, 0, tab.Length - 1);
+
+            stopwatch.Stop();
+            ElapsedTime = stopwatch.Elapsed;
         }
     }
 }
